@@ -1,2 +1,11 @@
 # KubernetesSubmissions
-Submissions for DevOps with Kubernetes course from the University of Helsinki
+
+## Exercises
+
+### Chapter 2
+
+- [1.1.]()
+- [1.2.]()
+- [1.3.]()
+- [1.4.]()
+- [1.5.]()
