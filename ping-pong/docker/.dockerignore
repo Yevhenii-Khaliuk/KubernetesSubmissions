@@ -1,0 +1,7 @@
+.idea/
+build/
+docker/
+.git/
+.gitignore
+src/test/
+.gradle/
