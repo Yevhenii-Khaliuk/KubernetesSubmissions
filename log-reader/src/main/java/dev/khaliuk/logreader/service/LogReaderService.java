@@ -4,14 +4,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
 public class LogReaderService {
-    private static final String FILE_NAME = "/opt/app/logs/log_output.txt";
+    private static final Path FILE_PATH = Paths.get("/opt/app/logs/log_output.txt");
 
     public String getLogOutput() throws IOException {
-        var path = Paths.get(FILE_NAME);
-        return String.join("\n", Files.readAllLines(path));
+        return Files.readString(FILE_PATH);
     }
 }
