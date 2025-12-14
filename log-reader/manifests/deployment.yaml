@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-reader-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-split
+  template:
+    metadata:
+      labels:
+        app: log-split
+    spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
+      containers:
+        - name: log-reader
+          image: ykhaliuk/log-reader
+          volumeMounts:
+            - name: shared-log
+              mountPath: /opt/app/logs
+        - name: log-generator
+          image: ykhaliuk/log-generator
+          volumeMounts:
+            - name: shared-log
+              mountPath: /opt/app/logs
