@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/")
 public class MainController {
@@ -15,7 +17,7 @@ public class MainController {
     }
 
     @GetMapping
-    public String getMessage() {
-        return messageService.getLogMessage();
+    public String getMessage() throws IOException {
+        return messageService.getLogWithPingPong();
     }
 }

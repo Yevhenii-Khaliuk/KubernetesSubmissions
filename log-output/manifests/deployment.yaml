@@ -12,9 +12,16 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: ping-pong-log
+          persistentVolumeClaim:
+            claimName: pv-claim
       containers:
         - name: log-output
           image: ykhaliuk/log-output
+          volumeMounts:
+            - name: ping-pong-log
+              mountPath: /opt/app/logs
           env:
             - name: PORT
               value: "8080"
