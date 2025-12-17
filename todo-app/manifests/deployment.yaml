@@ -12,9 +12,18 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: todo-app-volume
+          persistentVolumeClaim:
+            claimName: pv-claim
       containers:
         - name: todo-app
           image: ykhaliuk/todo-app
+          volumeMounts:
+            - name: todo-app-volume
+              mountPath: /opt/app/images
           env:
             - name: PORT
               value: "3000"
+            - name: IMAGES_DIR_PATH
+              value: "/opt/app/images"

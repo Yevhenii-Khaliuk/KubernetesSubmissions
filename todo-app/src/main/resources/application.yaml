@@ -4,3 +4,6 @@ spring:
 
 server:
   port: ${PORT:8080}
+
+todo-app:
+  images-dir-path: ${IMAGES_DIR_PATH:./images}
