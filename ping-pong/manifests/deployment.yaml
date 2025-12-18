@@ -12,16 +12,9 @@ spec:
       labels:
         app: ping-pong
     spec:
-      volumes:
-        - name: ping-pong-log
-          persistentVolumeClaim:
-            claimName: pv-claim
       containers:
         - name: ping-pong
           image: ykhaliuk/ping-pong
-          volumeMounts:
-            - name: ping-pong-log
-              mountPath: /opt/app/logs
           env:
             - name: PORT
               value: "8080"
