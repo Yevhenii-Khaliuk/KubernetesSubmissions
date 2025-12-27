@@ -2,7 +2,6 @@ package dev.khaliuk.todoapp.client;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -25,9 +24,8 @@ public class TodoBackendClient {
 
     private RestClient initRestClient() {
         return RestClient.builder()
-            .requestFactory(new JdkClientHttpRequestFactory())
-            .configureMessageConverters(config -> config.addCustomConverter(new StringHttpMessageConverter()))
-            .baseUrl(BASE_URL)
-            .build();
+                .requestFactory(new JdkClientHttpRequestFactory())
+                .baseUrl(BASE_URL)
+                .build();
     }
 }

@@ -10,10 +10,13 @@
 
 <img th:src="@{/images/image.jpeg}" alt="Image not found"/>
 
-<p>
-<input id="createTodoInput" maxlength="140"/>
-<button>Create todo</button>
+<form action="/todos" method="post">
+    <label for="createTodoInput">Add new:</label>
+    <input id="createTodoInput" maxlength="140" name="todo"/>
+    <input type="submit" value="Create"/>
+</form>
 
+<h2>TODOs</h2>
 <ul th:each="todo: ${todos}">
     <li th:text="${todo}"></li>
 </ul>

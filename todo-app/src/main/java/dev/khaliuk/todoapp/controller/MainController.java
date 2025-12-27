@@ -18,9 +18,9 @@ public class MainController {
     private final ExecutorService executorService;
 
     public MainController(
-        ImageService imageService,
-        TodoBackendClient todoBackendClient,
-        ExecutorService executorService
+            ImageService imageService,
+            TodoBackendClient todoBackendClient,
+            ExecutorService executorService
     ) {
         this.imageService = imageService;
         this.todoBackendClient = todoBackendClient;
@@ -35,6 +35,7 @@ public class MainController {
         model.addAttribute("todos", todos);
 
         imageFuture.join();
+
         return "index";
     }
 }

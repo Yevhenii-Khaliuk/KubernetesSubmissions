@@ -1,14 +1,11 @@
 package dev.khaliuk.todobackend.controller;
 
 import dev.khaliuk.todobackend.service.TodoService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,9 +23,11 @@ public class TodoController {
         return todoService.getAllTodos();
     }
 
-    @PostMapping(consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> createTodo(@RequestBody String todo) {
-        var response = todoService.createTodo(todo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<Void> createTodo(@RequestParam String todo) {
+        todoService.createTodo(todo);
+        return ResponseEntity.status(HttpStatus.SEE_OTHER)
+                .header(HttpHeaders.LOCATION, "/")
+                .build();
     }
 }
