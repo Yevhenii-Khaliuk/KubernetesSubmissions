@@ -24,3 +24,4 @@ Starting from the next tag Log Output app is in the `log-output` directory
 ## Chapter 3
 
 - [2.1](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.1)
+- [2.2](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.2)
