@@ -14,10 +14,8 @@
 <input id="createTodoInput" maxlength="140"/>
 <button>Create todo</button>
 
-<ul>
-    <li>Learn JavaScript</li>
-    <li>Learn React</li>
-    <li>Build a project</li>
+<ul th:each="todo: ${todos}">
+    <li th:text="${todo}"></li>
 </ul>
 
 <p>DevOps with Kubernetes 2025</p>
