@@ -31,10 +31,10 @@ public class MainController {
     public String getResponse(Model model) {
         var imageFuture = CompletableFuture.runAsync(imageService::prepareImage, executorService);
 
-        var todos = todoBackendClient.getAllTodos();
-        model.addAttribute("todos", todos);
+        var todosFuture = CompletableFuture.supplyAsync(todoBackendClient::getAllTodos, executorService)
+            .thenAccept(todos -> model.addAttribute("todos", todos));
 
-        imageFuture.join();
+        CompletableFuture.allOf(imageFuture, todosFuture).join();
 
         return "index";
     }
