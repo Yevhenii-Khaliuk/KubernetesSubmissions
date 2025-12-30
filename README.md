@@ -12,8 +12,8 @@
 - [1.6](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/1.6)
 
 Starting from the next tag Log Output app is in the `log-output` directory
-- [1.7](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/1.7)
 
+- [1.7](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/1.7)
 - [1.8](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/1.8)
 - [1.9](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/1.9)
 - [1.10](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/1.10)
@@ -25,3 +25,7 @@ Starting from the next tag Log Output app is in the `log-output` directory
 
 - [2.1](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.1)
 - [2.2](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.2)
+- [2.3](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.3)
+- [2.4](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.4)
+- [2.5](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.5)
+- [2.6](https://github.com/Yevhenii-Khaliuk/KubernetesSubmissions/tree/2.6)
