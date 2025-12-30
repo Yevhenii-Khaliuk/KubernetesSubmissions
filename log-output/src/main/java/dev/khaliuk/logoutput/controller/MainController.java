@@ -16,6 +16,6 @@ public class MainController {
 
     @GetMapping
     public String getMessage() {
-        return messageService.getLogWithPingPong();
+        return messageService.getCombinedMessage();
     }
 }
