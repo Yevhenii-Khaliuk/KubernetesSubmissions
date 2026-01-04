@@ -14,7 +14,7 @@ public class PingPongController {
 
     @GetMapping("/")
     public String getPongs() {
-        return counterService.getAndIncrementPongCounter();
+        return counterService.incrementAndGetPongCounter();
     }
 
     @GetMapping("/pings")

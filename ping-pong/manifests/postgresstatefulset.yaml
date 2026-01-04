@@ -4,7 +4,7 @@ metadata:
   namespace: exercises
   name: postgres-stset
 spec:
-  serviceName: postgres-svc
+  serviceName: postgres-db
   replicas: 1
   selector:
     matchLabels:
@@ -19,26 +19,32 @@ spec:
           image: postgres:18
           env:
             - name: POSTGRES_PASSWORD
-              value: "8080"
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  key: postgres_password
             - name: POSTGRES_USER
-              value: "8080"
+              valueFrom:
+                configMapKeyRef:
+                  name: ping-pong-config
+                  key: postgres_user
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: ping-pong-config
+                  key: postgres_db
           ports:
-            - name: web
+            - name: postgres-port
               containerPort: 5432
           volumeMounts:
             - name: postgres-data-storage
               mountPath: /data
-        - name: ping-pong
-          image: ykhaliuk/ping-pong
-          env:
-            - name: PORT
-              value: "8080"
   volumeClaimTemplates:
     - metadata:
         namespace: exercises
         name: postgres-data-storage
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes: [ "ReadWriteOnce" ]
         storageClassName: local-path
         resources:
           requests:
@@ -48,13 +54,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-svc
+  namespace: exercises
+  name: postgres-db
   labels:
     app: postgres
 spec:
   ports:
     - port: 5432
-      name: web
+      name: postgres-port
   clusterIP: None
   selector:
     app: postgres

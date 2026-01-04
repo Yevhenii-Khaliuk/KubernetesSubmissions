@@ -2,9 +2,9 @@ spring:
   application:
     name: ping-pong
   datasource:
-    url: jdbc:postgresql://{$POSTGRES_URL:localhost}:5432/mydb
-    username: myuser
-    password: mypassword
+    url: jdbc:postgresql://${POSTGRES_URL}:${POSTGRES_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,4 +12,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: { $PORT:8080 }
+  port: ${PORT:8080}
