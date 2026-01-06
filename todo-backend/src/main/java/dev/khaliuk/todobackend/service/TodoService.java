@@ -1,24 +1,27 @@
 package dev.khaliuk.todobackend.service;
 
-import dev.khaliuk.todobackend.repository.TodoStorage;
+import dev.khaliuk.todobackend.entity.Todo;
+import dev.khaliuk.todobackend.repository.TodoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TodoService {
-    private final TodoStorage todoStorage;
-
-    public TodoService(TodoStorage todoStorage) {
-        this.todoStorage = todoStorage;
-    }
+    private final TodoRepository todoRepository;
 
     public List<String> getAllTodos() {
-        return todoStorage.getAll();
+        return todoRepository.findAll()
+            .stream()
+            .map(Todo::getTask)
+            .toList();
     }
 
-    public String createTodo(String todo) {
+    public Todo createTodo(String todo) {
         System.out.println("Adding a new todo element: " + todo);
-        return todoStorage.add(todo);
+        var newTodo = Todo.builder().task(todo).build();
+        return todoRepository.save(newTodo);
     }
 }

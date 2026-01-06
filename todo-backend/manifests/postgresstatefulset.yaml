@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: project
+  name: postgres-stset
+spec:
+  serviceName: postgres-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:18
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  key: postgres_password
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-config
+                  key: postgres_user
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-config
+                  key: postgres_db
+          ports:
+            - name: postgres-port
+              containerPort: 5432
+          volumeMounts:
+            - name: postgres-data-storage
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        namespace: exercises
+        name: postgres-data-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: project
+  name: postgres-db
+  labels:
+    app: postgres
+spec:
+  ports:
+    - port: 5432
+      name: postgres-port
+  clusterIP: None
+  selector:
+    app: postgres

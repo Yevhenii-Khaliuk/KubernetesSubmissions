@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: project
+  name: todo-config
+data:
+  postgres_db: tododb
+  postgres_port: "5432"
+  postgres_url: postgres-db
+  postgres_user: todo
