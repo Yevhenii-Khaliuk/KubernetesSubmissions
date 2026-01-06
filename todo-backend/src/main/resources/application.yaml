@@ -13,3 +13,11 @@ spring:
 
 server:
   port: ${PORT:8080}
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
