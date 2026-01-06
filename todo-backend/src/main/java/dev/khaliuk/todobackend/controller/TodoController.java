@@ -1,5 +1,6 @@
 package dev.khaliuk.todobackend.controller;
 
+import dev.khaliuk.todobackend.dto.TodoResponse;
 import dev.khaliuk.todobackend.service.TodoService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,16 @@ public class TodoController {
         var createdTodo = todoService.createTodo(todo);
         System.out.println("Todo has been added: " + createdTodo);
         return ResponseEntity.status(HttpStatus.SEE_OTHER)
-                .header(HttpHeaders.LOCATION, "/")
-                .build();
+            .header(HttpHeaders.LOCATION, "/")
+            .build();
+    }
+
+    @RequestMapping("/random")
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TodoResponse> createTodo() {
+        var createdTodo = todoService.createRandomTodo();
+        System.out.println("Random Todo has been added: " + createdTodo);
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(createdTodo);
     }
 }

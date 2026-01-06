@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: random-todo
+spec:
+  schedule: "@hourly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: random-todo-cronjob
+              image: curlimages/curl:8.17.0
+              args:
+                - /bin/sh
+                - -c
+                - "curl -X POST -H \"Accept: application/json\" http://todo-backend:2345/todos/random"
+          restartPolicy: OnFailure

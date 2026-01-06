@@ -1,5 +1,7 @@
 package dev.khaliuk.todobackend.service;
 
+import dev.khaliuk.todobackend.client.WikipediaClient;
+import dev.khaliuk.todobackend.dto.TodoResponse;
 import dev.khaliuk.todobackend.entity.Todo;
 import dev.khaliuk.todobackend.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoRepository todoRepository;
+    private final WikipediaClient wikipediaClient;
 
     public List<String> getAllTodos() {
         return todoRepository.findAll()
@@ -21,7 +24,18 @@ public class TodoService {
 
     public Todo createTodo(String todo) {
         System.out.println("Adding a new todo element: " + todo);
-        var newTodo = Todo.builder().task(todo).build();
+        return saveNewTodo(todo);
+    }
+
+    public TodoResponse createRandomTodo() {
+        var randomArticleUrl = wikipediaClient.getRandomArticleUrl();
+        var task = "Read " + randomArticleUrl;
+        var savedTodo = saveNewTodo(task);
+        return new TodoResponse(savedTodo.getTask());
+    }
+
+    private Todo saveNewTodo(String task) {
+        var newTodo = Todo.builder().task(task).build();
         return todoRepository.save(newTodo);
     }
 }
